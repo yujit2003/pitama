@@ -104,22 +104,37 @@ const ProductDetails = () => {
   const mailto = () => {
     const email = "pitamafoods@gmail.com";
     const subject = "New Order";
-    const body = cart.map(item => `${item.name} - ${item.quantity} - Rs. ${item.price}`).join(" , ");
+    const body = cart.map(item => `${item.name} - ${item.quantity} - Rs. ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
 
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.open(mailtoLink, 'emailWindow');
   };
 
   const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
+    setCart((prevCart) => {
+      const existingProductIndex = prevCart.findIndex(cartItem => cartItem.name === product.name);
+      
+      if (existingProductIndex !== -1) {
+        // If the item is already in the cart, increase its quantity by 1
+        const updatedCart = prevCart.map((cartItem, index) => {
+          if (index === existingProductIndex) {
+            return { ...cartItem, cartQuantity: cartItem.cartQuantity + 1 };
+          }
+          return cartItem;
+        });
+        return updatedCart;
+      } else {
+        // Otherwise, add the new item with a cartQuantity of 1
+        return [...prevCart, { ...product, cartQuantity: 1 }];
+      }
+    });
   };
 
   return (
     <div className="min-h-screen py-10">
       <div className="">
-      <section className="md:hidden block mb-6 mx-4">
-      <h2 className="text-xl font-bold mb-4 flex justify-center items-center">My Cart <div className="px-4"><CiShoppingCart /></div></h2>
-
+        <section className="md:hidden block mb-6 mx-4">
+          <h2 className="text-xl font-bold mb-4 flex justify-center items-center">My Cart <div className="px-4"><CiShoppingCart /></div></h2>
           <ul className="space-y-2">
             {cart.map((item, index) => (
               <li
@@ -138,6 +153,7 @@ const ProductDetails = () => {
                     <h3 className="text-sm md:text-base font-semibold">{item.name}</h3>
                     <p className="text-xs md:text-sm">{item.quantity}</p>
                     <p className="text-xs md:text-sm">Rs. {item.price}</p>
+                    <p className="text-xs md:text-sm">Quantity: {item.cartQuantity}</p>
                   </div>
                 </div>
               </li>
@@ -162,7 +178,6 @@ const ProductDetails = () => {
         </section>
       </div>
       <div className="grid grid-cols-3 md:grid-cols-12 gap-4">
-        {/* Sidebar for categories */}
         <aside className="md:col-span-3 ml-4">
           <h2 className="text-xl font-bold mb-4">Categories</h2>
           <ul className="space-y-2">
@@ -179,7 +194,6 @@ const ProductDetails = () => {
           </ul>
         </aside>
 
-        {/* Products and Cart */}
         <section className="col-span-2 md:col-span-6 mx-2">
           <h2 className="text-xl font-bold mb-4 flex justify-center items-center">{selectedCategory}</h2>
           <ul className="space-y-2">
@@ -204,10 +218,8 @@ const ProductDetails = () => {
           </ul>
         </section>
 
-        {/* Cart Section */}
         <section className="md:col-span-3 hidden md:block">
-        <h2 className="text-xl font-bold mb-4 flex justify-center items-center">My Cart <div className="px-4"><CiShoppingCart /></div></h2>
-          
+          <h2 className="text-xl font-bold mb-4 flex justify-center items-center">My Cart <div className="px-4"><CiShoppingCart /></div></h2>
           {cart.length > 0 && (
             <div className="mt-4">
               <button
@@ -241,12 +253,12 @@ const ProductDetails = () => {
                     <h3 className="text-sm md:text-base font-semibold">{item.name}</h3>
                     <p className="text-xs md:text-sm">{item.quantity}</p>
                     <p className="text-xs md:text-sm">Rs. {item.price}</p>
+                    <p className="text-xs md:text-sm">Quantity: {item.cartQuantity}</p>
                   </div>
                 </div>
               </li>
             ))}
           </ul>
-          
         </section>
       </div>
     </div>
