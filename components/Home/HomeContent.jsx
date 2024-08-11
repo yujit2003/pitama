@@ -13,7 +13,9 @@ const HomeContent = () => {
                     <div id="text-block-12" className="mk-text-block flip-x mt-8">
                         <h1 className="text-3xl font-pacifico text-red-500 font-bold">Innovative, Consistent & Fresh, always.</h1>
                     </div>
+                    <a href="/products">
                     <button className="border mt-6 border-red-700 text-red-700 hover:bg-red-700 hover:text-white transition-all duration-300 py-2 px-4 justify-center items center">Browse Products</button>
+                    </a>
 
                     </div>
                 <div >
