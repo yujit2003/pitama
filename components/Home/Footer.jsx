@@ -9,7 +9,7 @@ const Footer = () => {
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white w-full h-auto shadow-lg flex items-center justify-center p-4">
                             <div className="text-center">
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                    <h1 className="text-[26px] text-[#b1cc39] font-medium normal-case">
+                                    <h1 className="text-[26px] text-[#b1cc39] flex justify-center items-center font-medium normal-case">
                                         Get in Touch
                                     </h1>
                                     <div>
