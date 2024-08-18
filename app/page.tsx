@@ -3,7 +3,6 @@ import NavBar from "../components/NavBar"
 import HomeScroll from "../components/Home/HomeScroll"
 import HomeContent from "../components/Home/HomeContent"
 import Dots from "../components/Home/Dots"
-import Products from "../components/Home/Products"
 import Footer from "../components/Home/Footer"
 import Dev from "../components/Home/Dev"
 
@@ -23,7 +22,6 @@ export default function Home() {
     <br />
     <br />
     <br />
-    <Products />
     <Footer />
     <Dev />
     </>
