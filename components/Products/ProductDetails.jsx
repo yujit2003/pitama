@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { CiShoppingCart } from "react-icons/ci";
 import Image from 'next/image';
 
@@ -96,26 +96,50 @@ const data = {
 const ProductDetails = () => {
   const [selectedCategory, setSelectedCategory] = useState("Rice");
   const [cart, setCart] = useState([]);
+  const [mobile, setMobile] = useState('');
+
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem('cart'));
+    if (savedCart) {
+      setCart(savedCart);
+    }
+  }, []);
 
   const categories = Object.keys(data);
 
   const removeFromCart = (item) => {
-    setCart((prevCart) => prevCart.filter(cartItem => cartItem.name !== item.name));
-  }
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter(cartItem => cartItem.name !== item.name);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
 
   const handleCategoryClick = (category) => {
-    console.log("Clicked category:", category);
     setSelectedCategory(category);
   };
 
   const mailto = () => {
+    if (!mobile || mobile.length !== 10 || !/^\d{10}$/.test(mobile)) {
+      alert("Please enter a valid 10-digit mobile number before placing the order.");
+      return;
+    }
+  
     const email = "pitamafoods@gmail.com";
     const subject = "New Order";
-    const body = cart.map(item => `${item.name} - ${item.quantity} - Rs. ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
-
+    const body = `Mobile Number: ${mobile}\n\n` + 
+      cart.map(item => `${item.name} - ${item.quantity} - Rs. ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
+  
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.open(mailtoLink, 'emailWindow');
   };
+  
+
+  const ClearCart = () => {
+    setCart([]);
+    localStorage.setItem('cart', JSON.stringify([]));
+
+  }
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -128,12 +152,16 @@ const ProductDetails = () => {
           }
           return cartItem;
         });
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
         return updatedCart;
       } else {
-        return [...prevCart, { ...product, cartQuantity: 1 }];
+        const updatedCart = [...prevCart, { ...product, cartQuantity: 1 }];
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+        return updatedCart;
       }
     });
   };
+
 
   return (
     <div className="min-h-screen py-10">
@@ -164,22 +192,41 @@ const ProductDetails = () => {
               </li>
             ))}
           </ul>
-          {cart.length > 0 && (
-            <div className="mt-4">
-              <button
-                onClick={() => setCart([])}
-                className="bg-red-500 text-white px-2 py-1 rounded mx-2"
-              >
-                Clear Cart
-              </button>
-              <button
-                onClick={() => mailto()}
-                className="bg-green-500 text-white px-2 py-1 rounded mb-2"
-              >
-                Place Order
-              </button>
+          {cart.length > 0 ? (
+            <div className="block p-4 space-y-4">
+              <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
+                <input
+                  type="text"
+                  placeholder="Mobile Number"
+                  className="border p-2 rounded-md flex-grow"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="flex flex-col md:flex-row md:space-x-4">
+                <button
+                  onClick={() => ClearCart()}
+                  className="bg-red-500 text-white px-4 py-2 rounded mb-2 md:mb-0"
+                >
+                  Clear Cart
+                </button>
+                <button
+                  onClick={() => {
+                    if (mobile.length === 10 && /^\d+$/.test(mobile)) {
+                      mailto();
+                    } else {
+                      alert('Please enter a valid 10-digit mobile number.');
+                    }
+                  }}
+                  className="bg-green-500 text-white px-4 py-2 rounded"
+                >
+                  Place Order
+                </button>
+              </div>
             </div>
-          )}
+          ): (<h1 className="flex justify-center items-center  font-bold text-[#e73737]">Empty</h1>)}
+
         </section>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
@@ -214,8 +261,8 @@ const ProductDetails = () => {
                 </div>
                 <div className="flex flex-col items-center">
                   <Image
-                    width={100}
-                    height={15}
+                    width={80}
+                    height={80}
                     alt={`${product.name} Image`}
                     src={product.imageSrc}
                     className="w-full h-full object-cover"
@@ -234,22 +281,41 @@ const ProductDetails = () => {
 
         <section className="md:col-span-3 hidden md:block">
           <h2 className="text-xl font-bold mb-4 flex justify-center items-center">My Cart <div className="px-4"><CiShoppingCart /></div></h2>
-          {cart.length > 0 && (
-            <div className="mt-4">
-              <button
-                onClick={() => setCart([])}
-                className="bg-red-500 text-white px-2 py-1 rounded mr-2"
-              >
-                Clear Cart
-              </button>
-              <button
-                onClick={() => mailto()}
-                className="bg-green-500 text-white px-2 py-1 rounded mb-2"
-              >
-                Place Order
-              </button>
+          {cart.length > 0 ? (
+            <div className="block p-4 space-y-4">
+              <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
+                <input
+                  type="text"
+                  placeholder="Mobile Number"
+                  className="border p-2 rounded-md flex-grow"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="flex flex-col md:flex-row md:space-x-4">
+                <button
+                  onClick={() => ClearCart()}
+                  className="bg-red-500 text-white px-4 py-2 rounded mb-2 md:mb-0"
+                >
+                  Clear Cart
+                </button>
+                <button
+                  onClick={() => {
+                    if (mobile.length === 10 && /^\d+$/.test(mobile)) {
+                      mailto();
+                    } else {
+                      alert('Please enter a valid 10-digit mobile number.');
+                    }
+                  }}
+                  className="bg-green-500 text-white px-4 py-2 rounded"
+                >
+                  Place Order
+                </button>
+              </div>
             </div>
-          )}
+          ):(<h1 className="flex justify-center items-center  font-bold text-[#dd0f0f]">Empty</h1>)}
+
           <ul className="space-y-2">
             {cart.map((item, index) => (
               <li
