@@ -54,8 +54,7 @@ const Header = ({ page }) => {
                 </div>
                 <div className={`hover:text-[#6bb545] -tracking-tighter flex items-center justify-center ${page === 'cart' && 'border-[#6bb545] border-t-2'}  hover:border-t-2 hover:border-[#6bb545] transition-all h-full w-40 ${page === 'cart' ? 'border-[#6bb545]' : ''}`}>
                     <Link href={{
-                        pathname: "/cart",
-                        query: { cartItems: JSON.stringify(cartItems) }
+                        pathname: "/cart"
                     }} className={`text-lg flex justify-center items-center font-medium ${page === 'cart' ? 'text-[#6bb545]' : 'text-gray-900'}`}>
                         My Cart <div className='mx-2'> <CiShoppingCart /></div>
                     </Link>

@@ -74,7 +74,8 @@ const MyCart = () => {
                                 className="w-full h-full object-cover mb-2"
                             />
                             <h3 className="text-sm font-semibold mb-2">{item.name}</h3>
-                            <p className="text-xs"><b>Quantity -</b> {item.quantity}</p>
+                            <p className="text-xs md:text-sm">{item.quantity}</p>
+                            <p className="text-xs"><b>Quantity -</b> {item.cartQuantity}</p>
                             <p className="text-xs"><b>Rs.</b> {item.price}</p>
                         </li>
                     ))}

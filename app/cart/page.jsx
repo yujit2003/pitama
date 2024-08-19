@@ -7,7 +7,7 @@ import Dev from '@/components/Home/Dev'
 const page = () => {
   return (
     <div>
-      <NavBar />
+      <NavBar page='cart'/>
       <MyCart />
       <Footer />
       <Dev />
