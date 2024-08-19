@@ -120,20 +120,16 @@ const ProductDetails = () => {
   };
 
   const mailto = () => {
-    if (!mobile || mobile.length !== 10 || !/^\d{10}$/.test(mobile)) {
-      alert("Please enter a valid 10-digit mobile number before placing the order.");
-      return;
-    }
-  
+
     const email = "pitamafoods@gmail.com";
     const subject = "New Order";
-    const body = `Mobile Number: ${mobile}\n\n` + 
-      cart.map(item => `${item.name} - ${item.quantity} - Rs. ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
-  
+    const body = `Mobile Number: ${mobile}\n\n` +
+      cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
+
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.open(mailtoLink, 'emailWindow');
   };
-  
+
 
   const ClearCart = () => {
     setCart([]);
@@ -185,7 +181,7 @@ const ProductDetails = () => {
                   <div>
                     <h3 className="text-sm md:text-base font-semibold">{item.name}</h3>
                     <p className="text-xs md:text-sm">{item.quantity}</p>
-                    <p className="text-xs md:text-sm">Rs. {item.price}</p>
+                    <p className="text-xs md:text-sm">$ {item.price}</p>
                     <p className="text-xs md:text-sm">Quantity: {item.cartQuantity}</p>
                   </div>
                 </div>
@@ -212,20 +208,16 @@ const ProductDetails = () => {
                   Clear Cart
                 </button>
                 <button
-                  onClick={() => {
-                    if (mobile.length === 10 && /^\d+$/.test(mobile)) {
-                      mailto();
-                    } else {
-                      alert('Please enter a valid 10-digit mobile number.');
-                    }
-                  }}
+                  onClick={() => 
+                    mailto()
+                  }
                   className="bg-green-500 text-white px-4 py-2 rounded"
                 >
                   Place Order
                 </button>
               </div>
             </div>
-          ): (<h1 className="flex justify-center items-center  font-bold text-[#e73737]">Empty</h1>)}
+          ) : (<h1 className="flex justify-center items-center  font-bold text-[#e73737]">Empty</h1>)}
 
         </section>
       </div>
@@ -257,7 +249,7 @@ const ProductDetails = () => {
                 <div className="mb-2 md:mb-0">
                   <h3 className="text-sm md:text-base font-semibold mb-3">{product.name}</h3>
                   <p className="text-xs md:text-sm"><b>Quantity -</b> {product.quantity}</p>
-                  <p className="text-xs md:text-sm"><b>Rs.</b> {product.price}</p>
+                  <p className="text-xs md:text-sm"><b>$</b> {product.price}</p>
                 </div>
                 <div className="flex flex-col items-center">
                   <Image
@@ -301,20 +293,14 @@ const ProductDetails = () => {
                   Clear Cart
                 </button>
                 <button
-                  onClick={() => {
-                    if (mobile.length === 10 && /^\d+$/.test(mobile)) {
-                      mailto();
-                    } else {
-                      alert('Please enter a valid 10-digit mobile number.');
-                    }
-                  }}
+                  onClick={() => mailto()}
                   className="bg-green-500 text-white px-4 py-2 rounded"
                 >
                   Place Order
                 </button>
               </div>
             </div>
-          ):(<h1 className="flex justify-center items-center  font-bold text-[#dd0f0f]">Empty</h1>)}
+          ) : (<h1 className="flex justify-center items-center  font-bold text-[#dd0f0f]">Empty</h1>)}
 
           <ul className="space-y-2">
             {cart.map((item, index) => (
@@ -332,7 +318,7 @@ const ProductDetails = () => {
                   <div className="">
                     <h3 className="text-sm md:text-base font-semibold">{item.name}</h3>
                     <p className="text-xs md:text-sm">{item.quantity}</p>
-                    <p className="text-xs md:text-sm">Rs. {item.price}</p>
+                    <p className="text-xs md:text-sm">$ {item.price}</p>
                     <p className="text-xs md:text-sm">Quantity: {item.cartQuantity}</p>
                   </div>
                 </div>

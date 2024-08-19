@@ -14,15 +14,11 @@ const MyCart = () => {
     }, []);
 
     const mailto = () => {
-        if (!mobile || mobile.length !== 10 || !/^\d{10}$/.test(mobile)) {
-          alert("Please enter a valid 10-digit mobile number before placing the order.");
-          return;
-        }
       
         const email = "pitamafoods@gmail.com";
         const subject = "New Order";
         const body = `Mobile Number: ${mobile}\n\n` + 
-        cartItems.map(item => `${item.name} - ${item.quantity} - Rs. ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
+        cartItems.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
       
         const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         window.open(mailtoLink, 'emailWindow');
@@ -45,13 +41,7 @@ const MyCart = () => {
                         required
                     />
                     <button
-                        onClick={() => {
-                            if (mobile.length === 10 && /^\d+$/.test(mobile)) {
-                              mailto();
-                            } else {
-                              alert('Please enter a valid 10-digit mobile number.');
-                            }
-                          }}
+                        onClick={() => mailto()}
                         className="bg-green-500 text-white px-4 py-2 rounded ml-4"
                     >
                         Place Order
@@ -76,7 +66,7 @@ const MyCart = () => {
                             <h3 className="text-sm font-semibold mb-2">{item.name}</h3>
                             <p className="text-xs md:text-sm">{item.quantity}</p>
                             <p className="text-xs"><b>Quantity -</b> {item.cartQuantity}</p>
-                            <p className="text-xs"><b>Rs.</b> {item.price}</p>
+                            <p className="text-xs"><b>$</b> {item.price}</p>
                         </li>
                     ))}
                 </ul>
