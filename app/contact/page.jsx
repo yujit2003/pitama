@@ -8,7 +8,7 @@ const page = () => {
   return (
     <div>
       <NavBar page='contact'/>
-      <div className="box-border md:mt-20 mt-6">
+      <div className="box-border md:mt-10 mt-6">
             <div className="wpb_wrapper">
                 <div id="padding-10" className="mk-padding-divider hidden sm:block clearfix"></div>
                 <div >

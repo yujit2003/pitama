@@ -32,7 +32,7 @@ const Contact = () => {
 
   return (
     <div className="h-full ">
-      <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full">
+      <div className="container mx-auto py-14 text-center xl:text-left flex items-center justify-center h-full">
         <div className="flex flex-col w-full max-w-[700px]">
           <b className="text-4xl text-center mb-12">
             Let&apos;s <span className="text-red-500">connect.</span>

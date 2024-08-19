@@ -95,6 +95,28 @@
   transition-property: width, background-color;
 }
 
+.mk-photo-roller-frame {
+  width: 300%; /* Ensure the frame is wide enough to include both images */
+  display: flex;
+  animation: horizontalScroll 30s infinite linear;
+  height: 40vh;
+}
+
+@media (max-width: 640px) {
+  .mk-photo-roller-frame {
+    height: 20vh; /* Adjust height for smaller screens */
+  }
+}
+
+@keyframes horizontalScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes progressAnimation {
   from {
     width: 0%;

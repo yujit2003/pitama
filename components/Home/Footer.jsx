@@ -19,9 +19,9 @@ const Footer = () => {
                                             </svg>
                                         </div>
                                         <div className="flex justify-center items-center">
-                                            6075 Kestrel Rd,<br />
-                                            Mississauga, ON L5T 1Y8<br />
-                                            Canada
+                                        220 Milner Ave<br />
+                                        Toronto<br />
+                                        ON M1S 3R1
                                         </div>
                                     </div>
                                     <div>
@@ -32,8 +32,6 @@ const Footer = () => {
                                         </div>
                                         <div className="flex justify-center items-center">
                                             Phone<br />
-                                            (905) 364-1600<br />
-                                            1 (877) SUNDINE
                                         </div>
                                     </div>
                                     <div>

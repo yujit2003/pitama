@@ -23,10 +23,10 @@ const Header = ({ page }) => {
             <div className="flex">
                 <Image
                     src={logo}
-                    width={200}
+                    width={250}
                     height={200}
                     alt="Policy"
-                    className="object-contain md:mx-8"
+                    className="object-contain md:mx-8 h-[20vh]"
                 />
                 <button
                     className="text-gray-700 md:hidden block ml-8 left-0"
