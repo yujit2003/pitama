@@ -119,6 +119,19 @@ const ProductDetails = () => {
     setSelectedCategory(category);
   };
 
+  const whatsappMessage = () => {
+
+    let url = `https://web.whatsapp.com/send?phone=8824270600`;
+
+    const body = `Mobile Number: ${mobile}\n\n` +
+      cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
+
+    url += `&text=${encodeURI(body)}&app_absent=0`;
+
+    // Open our newly created URL in a new tab to send the message
+    window.open(url);
+  }
+
   const mailto = () => {
 
     const email = "pitamafoods@gmail.com";
@@ -211,9 +224,17 @@ const ProductDetails = () => {
                   onClick={() => 
                     mailto()
                   }
-                  className="bg-green-500 text-white px-4 py-2 rounded"
+                  className="bg-green-500 text-white px-4 py-2 rounded mb-2"
                 >
-                  Place Order
+                  Order via Email
+                </button>
+                <button
+                  onClick={() => 
+                    whatsappMessage()
+                  }
+                  className="bg-green-500 text-white px-4 py-2 rounded mb-2"
+                >
+                  Order via WhatsApp
                 </button>
               </div>
             </div>
@@ -238,7 +259,7 @@ const ProductDetails = () => {
           </ul>
         </aside>
 
-        <section className="md:col-span-6 mx-2">
+        <section className="md:col-span-5 mx-2">
           <h2 className="text-xl font-bold mb-4 flex justify-center items-center">{selectedCategory}</h2>
           <ul className="space-y-2">
             {data[selectedCategory].map((product) => (
@@ -271,7 +292,7 @@ const ProductDetails = () => {
           </ul>
         </section>
 
-        <section className="md:col-span-3 hidden md:block">
+        <section className="md:col-span-4 hidden md:block">
           <h2 className="text-xl font-bold mb-4 flex justify-center items-center">My Cart <div className="px-4"><CiShoppingCart /></div></h2>
           {cart.length > 0 ? (
             <div className="block p-4 space-y-4">
@@ -296,7 +317,15 @@ const ProductDetails = () => {
                   onClick={() => mailto()}
                   className="bg-green-500 text-white px-4 py-2 rounded"
                 >
-                  Place Order
+                  Order via Email
+                </button>
+                <button
+                  onClick={() => 
+                    whatsappMessage()
+                  }
+                  className="bg-green-500 text-white px-4 py-2 rounded "
+                >
+                  Order via WhatsApp
                 </button>
               </div>
             </div>

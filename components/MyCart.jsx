@@ -13,6 +13,19 @@ const MyCart = () => {
         }
     }, []);
 
+    const whatsappMessage = () => {
+
+        let url = `https://web.whatsapp.com/send?phone=8824270600`;
+    
+        const body = `Mobile Number: ${mobile}\n\n` +
+          cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
+    
+        url += `&text=${encodeURI(body)}&app_absent=0`;
+    
+        // Open our newly created URL in a new tab to send the message
+        window.open(url);
+      }
+
     const mailto = () => {
       
         const email = "pitamafoods@gmail.com";
@@ -42,10 +55,18 @@ const MyCart = () => {
                     />
                     <button
                         onClick={() => mailto()}
-                        className="bg-green-500 text-white px-4 py-2 rounded ml-4"
+                        className="bg-green-500 text-white px-4 py-2 rounded ml-4 mr-2"
                     >
-                        Place Order
+                        Place Order via Email
                     </button>
+                    <button
+                  onClick={() => 
+                    whatsappMessage()
+                  }
+                  className="bg-green-500 text-white px-4 py-2 rounded"
+                >
+                  Place Order via WhatsApp
+                </button>
                 </div>
             )}
 
