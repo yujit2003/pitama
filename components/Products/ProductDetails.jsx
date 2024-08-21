@@ -123,8 +123,7 @@ const ProductDetails = () => {
 
     let url = `https://web.whatsapp.com/send?phone=8824270600`;
 
-    const body = `Mobile Number: ${mobile}\n\n` +
-      cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
+    const body = cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
 
     url += `&text=${encodeURI(body)}&app_absent=0`;
 

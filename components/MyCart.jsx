@@ -17,8 +17,7 @@ const MyCart = () => {
 
         let url = `https://web.whatsapp.com/send?phone=8824270600`;
     
-        const body = `Mobile Number: ${mobile}\n\n` +
-          cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
+        const body = cartItems.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
     
         url += `&text=${encodeURI(body)}&app_absent=0`;
     
@@ -44,29 +43,31 @@ const MyCart = () => {
         <div className='min-h-[50vh]'>
 
             {cartItems.length > 0 && (
-                <div className="mt-4 flex justify-center items-center">
+                <div className="mt-4 justify-center items-center flex flex-col md:flex-row md:space-x-4">
                     <input
                         type="text"
                         placeholder="Mobile Number"
-                        className="border p-2 rounded-md"
+                        className="border p-2 mb-2 rounded-md"
                         value={mobile}
                         onChange={(e) => setMobile(e.target.value)}
                         required
                     />
+                    <div className="flex flex-col md:flex-row md:space-x-4">
                     <button
                         onClick={() => mailto()}
-                        className="bg-green-500 text-white px-4 py-2 rounded ml-4 mr-2"
+                        className="bg-green-500 text-white px-4 py-2 mb-2 rounded ml-4 mr-2"
                     >
-                        Place Order via Email
+                        Order via Email
                     </button>
                     <button
                   onClick={() => 
                     whatsappMessage()
                   }
-                  className="bg-green-500 text-white px-4 py-2 rounded"
+                  className="bg-green-500 text-white mb-2 px-4 py-2 rounded"
                 >
-                  Place Order via WhatsApp
+                  Order via WhatsApp
                 </button>
+                </div>
                 </div>
             )}
 
