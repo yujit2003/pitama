@@ -122,7 +122,7 @@ const ProductDetails = () => {
   const whatsappMessage = () => {
 
     // let url = `https://web.whatsapp.com/send?phone=8824270600`;
-    let url = `whatsapp://send?phone=8824270600`;
+    let url = `whatsapp://send?phone=918824270600`;
 
     const body = cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
 
