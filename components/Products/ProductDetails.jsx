@@ -120,17 +120,32 @@ const ProductDetails = () => {
   };
 
   const whatsappMessage = () => {
-
-    // let url = `https://web.whatsapp.com/send?phone=8824270600`;
-    let url = `whatsapp://send?phone=+1(289)380-7130`;
-
-    const body = cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
-
-    url += `&text=${encodeURI(body)}&app_absent=0`;
-
-    // Open our newly created URL in a new tab to send the message
-    window.open(url);
-  }
+    const phoneNumber = "+12893807130"; // Use the international format
+    const body = cart
+      .map(
+        (item) =>
+          `${item.name} - ${item.quantity} - $${item.price * item.cartQuantity} - Item Quantity: ${item.cartQuantity}`
+      )
+      .join("\n");
+  
+    const encodedBody = encodeURIComponent(body);
+  
+    // Check if the user is on mobile or desktop
+    const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+    let url;
+  
+    if (isMobile) {
+      // For mobile devices, use the WhatsApp app
+      url = `whatsapp://send?phone=${phoneNumber}&text=${encodedBody}`;
+    } else {
+      // For desktop (WhatsApp Web)
+      url = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedBody}`;
+    }
+  
+    // Open the URL in a new tab
+    window.open(url, "_blank");
+  };
 
   const mailto = () => {
 
