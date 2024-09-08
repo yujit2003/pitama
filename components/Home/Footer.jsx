@@ -39,6 +39,7 @@ const Footer = () => {
                                         </div>
                                         <div className="flex justify-center items-center">
                                             Phone<br />
+                                            +1 (289) 380-7130
                                         </div>
                                     </div>
                                     <div>

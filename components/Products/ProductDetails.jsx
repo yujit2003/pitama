@@ -122,7 +122,7 @@ const ProductDetails = () => {
   const whatsappMessage = () => {
 
     // let url = `https://web.whatsapp.com/send?phone=8824270600`;
-    let url = `whatsapp://send?phone=918824270600`;
+    let url = `whatsapp://send?phone=+1(289)380-7130`;
 
     const body = cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
 
@@ -168,6 +168,32 @@ const ProductDetails = () => {
         localStorage.setItem('cart', JSON.stringify(updatedCart));
         return updatedCart;
       }
+    });
+  };
+
+  const increaseQuantity = (cartItem) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map(item => {
+        if (item.name === cartItem.name) {
+          return { ...item, cartQuantity: item.cartQuantity + 1 };
+        }
+        return item;
+      });
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
+
+  const decreaseQuantity = (cartItem) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map(item => {
+        if (item.name === cartItem.name) {
+          return { ...item, cartQuantity: Math.max(item.cartQuantity - 1, 0) };
+        }
+        return item;
+      }).filter(item => item.cartQuantity > 0);  // Remove item if quantity is 0
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
     });
   };
 
@@ -221,7 +247,7 @@ const ProductDetails = () => {
                   Clear Cart
                 </button>
                 <button
-                  onClick={() => 
+                  onClick={() =>
                     mailto()
                   }
                   className="bg-green-500 text-white px-4 py-2 rounded mb-2"
@@ -229,7 +255,7 @@ const ProductDetails = () => {
                   Order via Email
                 </button>
                 <button
-                  onClick={() => 
+                  onClick={() =>
                     whatsappMessage()
                   }
                   className="bg-green-500 text-white px-4 py-2 rounded mb-2"
@@ -262,33 +288,56 @@ const ProductDetails = () => {
         <section className="md:col-span-5 mx-2">
           <h2 className="text-xl font-bold mb-4 flex justify-center items-center">{selectedCategory}</h2>
           <ul className="space-y-2">
-            {data[selectedCategory].map((product) => (
-              <li
-                key={product.name}
-                className="border rounded-md p-2 flex flex-col md:flex-row justify-between items-center hover:bg-gray-100"
-              >
-                <div className="mb-2 md:mb-0">
-                  <h3 className="text-sm md:text-base font-semibold mb-3">{product.name}</h3>
-                  <p className="text-xs md:text-sm"><b>Quantity -</b> {product.quantity}</p>
-                  <p className="text-xs md:text-sm"><b>$</b> {product.price}</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <Image
-                    width={80}
-                    height={80}
-                    alt={`${product.name} Image`}
-                    src={product.imageSrc}
-                    className="w-full h-full object-cover"
-                  />
-                  <button
-                    onClick={() => addToCart(product)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white px-2 md:text-base text-xs py-1 rounded mt-2"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </li>
-            ))}
+            {data[selectedCategory].map((product) => {
+              const cartItem = cart.find(item => item.name === product.name);
+
+              return (
+                <li
+                  key={product.name}
+                  className="border rounded-md p-2 flex flex-col md:flex-row justify-between items-center hover:bg-gray-100"
+                >
+                  <div className="mb-2 md:mb-0">
+                    <h3 className="text-sm md:text-base font-semibold mb-3">{product.name}</h3>
+                    <p className="text-xs md:text-sm"><b>Quantity -</b> {product.quantity}</p>
+                    <p className="text-xs md:text-sm"><b>$</b> {product.price}</p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <Image
+                      width={80}
+                      height={80}
+                      alt={`${product.name} Image`}
+                      src={product.imageSrc}
+                      className="w-full h-full object-cover"
+                    />
+
+                    {cartItem ? (
+                      <div className="flex items-center space-x-2 mt-2">
+                        <button
+                          onClick={() => decreaseQuantity(cartItem)}
+                          className="bg-gray-100 hover:bg-gray-300 text-black px-2 text-xs py-1 rounded border border-gray-300"
+                        >
+                          -
+                        </button>
+                        <span className="text-sm mx-2">{cartItem.cartQuantity}</span>
+                        <button
+                          onClick={() => increaseQuantity(cartItem)}
+                          className="bg-gray-100 hover:bg-gray-300 text-black px-2 text-xs py-1 rounded border border-gray-300"
+                        >
+                          +
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => addToCart(product)}
+                        className="bg-blue-500 hover:bg-blue-700 text-white px-2 text-xs md:text-base py-1 rounded mt-2"
+                      >
+                        Add to Cart
+                      </button>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </section>
 
@@ -320,7 +369,7 @@ const ProductDetails = () => {
                   Order via Email
                 </button>
                 <button
-                  onClick={() => 
+                  onClick={() =>
                     whatsappMessage()
                   }
                   className="bg-green-500 text-white px-4 py-2 rounded "
