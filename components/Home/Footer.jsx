@@ -26,9 +26,9 @@ const Footer = () => {
                                             </svg>
                                         </div>
                                         <div className="flex justify-center items-center">
-                                            220 Milner Ave<br />
-                                            Toronto<br />
-                                            ON M1S 3R1
+                                        1850 Ellesmere Road,<br />
+                                        Scarborough<br />
+                                        ON M1H 2V5
                                         </div>
                                     </div>
                                     <div>
