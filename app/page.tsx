@@ -5,11 +5,12 @@ import HomeContent from "../components/Home/HomeContent"
 import Dots from "../components/Home/Dots"
 import Footer from "../components/Home/Footer"
 import Dev from "../components/Home/Dev"
+import SiteDown from "../components/SiteDown"
 
 export default function Home() {
   return (
     <>
-    <NavBar page='home'/>
+    {/* <NavBar page='home'/>
     <HomeScroll />
     <HomeContent />
     <br />
@@ -23,7 +24,8 @@ export default function Home() {
     <br />
     <br />
     <Footer />
-    <Dev />
+    <Dev /> */}
+    <SiteDown />
     </>
   );
 }
