@@ -1,33 +1,41 @@
-import React from 'react'
-import NavBar from "../../components/NavBar"
-import Contact from "../../components/Contact/Contact"
-import Footer from "../../components/Home/Footer"
-import Dev from "../../components/Home/Dev"
+import React from "react";
+import NavBar from "../../components/NavBar";
+import Contact from "../../components/Contact/Contact";
+import Footer from "../../components/Home/Footer";
+import Dev from "../../components/Home/Dev";
 
-const page = () => {
+const Page = () => {
   return (
-    <div>
-      <NavBar page='contact'/>
-      <div className="box-border md:mt-10 mt-6">
-            <div className="wpb_wrapper">
-                <div id="padding-10" className="mk-padding-divider hidden sm:block clearfix"></div>
-                <div >
-                    <div id="text-block-11 " className="mk-text-block text-center mb-0  mx-2 md:mx-[30vw] ">
-                        <h1 className="text-4xl font-bold mb-8 text-[#fcaf17] -tracking-tighter">CONTACT US</h1>
-                        <h1 className="text-3xl font-pacifico text-red-500 font-bold">It is our Pleasure to serve you</h1>
-                        <p className="">Please fill out the form, we will respond within 24 hours.</p>
-
-                    </div>
-                <div >
-                </div>
-                </div>
-            </div>
+    <div className="flex flex-col min-h-screen">
+      <NavBar page="contact" />
+      
+      {/* Hero Section */}
+      <div className="relative flex flex-col items-center text-center py-20 px-4 md:px-0">
+        <h1 className="text-5xl font-bold text-[#fcaf17] tracking-tight mb-4">
+          CONTACT US
+        </h1>
+        <h2 className="text-2xl md:text-3xl font-pacifico text-red-500 font-bold mb-4">
+          It is our Pleasure to serve you
+        </h2>
+        <p className="text-lg max-w-3xl text-gray-700">
+          Please fill out the form, and we will respond within 24 hours.
+        </p>
+      </div>
+      
+      {/* Contact Form */}
+      <div className="flex justify-center">
+        <div className="bg-white shadow-lg rounded-lg p-8 md:p-2 w-full max-w-3xl">
+          <Contact />
         </div>
-        <Contact />
+      </div>
+      
+      {/* Footer */}
+      <div className="mt-auto">
         <Footer />
-        <Dev />
+      </div>
+      <Dev />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;
