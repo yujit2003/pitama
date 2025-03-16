@@ -6,65 +6,68 @@ import Image from 'next/image';
 
 const data = {
   "Rice": [
-    { name: "Rani Mahal Basmati Rice", quantity: "40lB", price: 51, imageSrc: "/Rani Mahal Basmati Rice.jpg" },
+    { name: "Rani Mahal Basmati Rice", quantity: "40lB", price: 54.99, imageSrc: "/Rani Mahal Basmati Rice.jpg" },
+    { name: "Rani Mahal Basmati Rice( Golden Sella )", quantity: "40lB", price: 47, imageSrc: "/Rani Mahal Basmati Rice.jpg" },
+    { name: "Rani Mahal Basmati Rice( White Sella )", quantity: "40lB", price: 45, imageSrc: "/Rani Mahal Basmati Rice.jpg" },
     { name: "Punjabi Tadka Basmati Rice", quantity: "40lB", price: 45, imageSrc: "/Punjabi Tadka Basmati Rice.jpg" },
-    { name: "TIRUPATI IDLY RICE", quantity: "20KG BAG", price: 54, imageSrc: "/TIRUPATI IDLY RICE.jpg" },
-    { name: "SONA MASOORI RICE", quantity: "20 lb bag", price: 25, imageSrc: "/SONA MASOORI RICE.jpg" },
-    { name: "PONNI BOILED RICE", quantity: "20KG BAG", price: 45, imageSrc: "/PONNI BOILED RICE.jpg" },
-    { name: "JEERAKASALA RICE", quantity: "20kg bag", price: 110, imageSrc: "/JEERAKASALA RICE.webp" },
-    { name: "ROYAL KERALA Matta Rice long grain", quantity: "20kg bag", price: 37, imageSrc: "/ROYAL KERALA Matta Rice long grain.webp" },
-    { name: "Tirupati Ponni Boiled Rice", quantity: "10lb*4", price: 40, imageSrc: "/Tirupati Ponni Boiled Rice.jpg" },
-    { name: "Tirupati Idaly Rice", quantity: "10 lb*4", price: 44, imageSrc: "/Tirupati Idaly Rice.webp" },
-    { name: "Tirupati Matta Rice", quantity: "10 lb*4", price: 40, imageSrc: "/Tirupati Matta Rice.jpg" }
+    { name: "TIRUPATI IDLY RICE", quantity: "20KG BAG", price: 43.5, imageSrc: "/TIRUPATI IDLY RICE.jpg" },
+    { name: "SONA MASOORI RICE", quantity: "20 lb bag", price: 24.99, imageSrc: "/SONA MASOORI RICE.jpg" },
+    { name: "PONNI BOILED RICE", quantity: "20KG BAG", price: 43.5, imageSrc: "/PONNI BOILED RICE.jpg" },
+    { name: "JEERAKASALA RICE", quantity: "20kg bag", price: 75, imageSrc: "/JEERAKASALA RICE.webp" },
+    { name: "Pavizham Matta Rice Long Grain", quantity: "20LB", price: 23.99, imageSrc: "/Tirupati Matta Rice.jpg" }
   ],
-  "Pulses & Grains": [
-    { name: "Moong Dal Washed", quantity: "55lb", price: 65, imageSrc: "/Moong Dal Washed.webp" },
-    { name: "TIRUPATI URAD GOTA", quantity: "20KG BAG", price: 60, imageSrc: "/TIRUPATI URAD GOTA.jpg" },
-    { name: "URAD GOTA", quantity: "55lb", price: 75, imageSrc: "/URAD GOTA.webp" },
-    { name: "Tirupati Dalia Split (Roasted Gram)", quantity: "20KG BAG", price: 70, imageSrc: "/Tirupati Dalia Split.jpg" },
-    { name: "TIRUPATI WHITE RICE FLOUR", quantity: "20KG BAG", price: 37, imageSrc: "/TIRUPATI WHITE RICE FLOUR.jpg" },
-    { name: "TIRUPATI Sabudana", quantity: "2LB", price: 4, imageSrc: "/TIRUPATI Sabudana.webp" },
-    { name: "TIRUPATI Urad Gota White", quantity: "20KG BAG", price: 60, imageSrc: "/TIRUPATI Urid Gota White.webp" },
-    { name: "TIRUPATI Roasted Gram Split", quantity: "20KG BAG", price: 70, imageSrc: "/TIRUPATI Roasted Gram Split.webp" },
-    { name: "ROYAL KERALA White Rice Flour", quantity: "4LB*10", price: 35, imageSrc: "/ROYAL KERALA White Rice Flour.webp" },
-    { name: "TIRUPATI White Rice Flour", quantity: "20KG BAG", price: 36, imageSrc: "/TIRUPATI WHITE RICE FLOUR.jpg" }
+  "Pulses": [
+    { name: "Yellow Moong Dal", quantity: "55lb", price: 67.5, imageSrc: "/Moong Dal Washed.webp" },
+    { name: "URAD GOTA", quantity: "55lb", price: 82.5, imageSrc: "/URAD GOTA.webp" },
+    { name: "Tirupati Dalia Split (Roasted Gram)", quantity: "20KG BAG", price: 85, imageSrc: "/Tirupati Dalia Split.jpg" },
+    { name: "TIRUPATI Roasted Gram Split", quantity: "1LB X 24", price: 60, imageSrc: "/TIRUPATI Roasted Gram Split.webp" },
+    { name: "Toor Dal", quantity: "55LB", price: 98, imageSrc: "/TIRUPATI Sabudana.jpg" },
+    { name: "Chana Dal", quantity: "55KG BAG", price: 60, imageSrc: "/chanadal.jpg" },
+  ],
+  "Noodles": [
+    { name: "Chings Veg Hakka Noodles", quantity: "15 x 600g", price: 55, imageSrc: "/Chings Veg Hakka Noodles.jpg" },
+  ],
+  "Flour Items": [
+    { name: "Tirupati Idli Rava", quantity: "4LB x 10", price: 50, imageSrc: "/flour.webp" },
+    { name: "Tirupati White Rice Flour", quantity: "4LB x 10", price: 43, imageSrc: "/flour.webp" },
+    { name: "Tirupati White Rice Flour", quantity: "20KG", price: 37, imageSrc: "/flour.webp" },
   ],
   "Spices": [
     { name: "TIRUPATI TURMERIC POWDER Type-1", quantity: "5LB X 8", price: 10.5, imageSrc: "/TIRUPATI TURMERIC POWDER.webp" },
     { name: "TIRUPATI TURMERIC POWDER Type-2", quantity: "20 Kg Bag", price: 72, imageSrc: "/TIRUPATI TURMERIC POWDER.webp" },
-    { name: "TIRUPATI WHOLE DRY CHILLI (STEMLESS) Type-1", quantity: "5LB X 4", price: 24.5, imageSrc: "/TIRUPATI WHOLE DRY CHILLI (STEMLESS).jpg" },
-    { name: "TIRUPATI WHOLE DRY CHILLI (STEMLESS) Type-2", quantity: "10KG BOX", price: 92, imageSrc: "/TIRUPATI WHOLE DRY CHILLI (STEMLESS).jpg" },
-    { name: "TIRUPATI CORIANDER SEED Type-1", quantity: "400G", price: 2, imageSrc: "/TIRUPATI CORIANDER SEED.webp" },
-    { name: "TIRUPATI CORIANDER SEED Type-2", quantity: "20KG", price: 66, imageSrc: "/TIRUPATI CORIANDER SEED.webp" },
-    { name: "TIRUPATI CORIANDER POWDER", quantity: "10LB X 4", price: 22, imageSrc: "/TIRUPATI CORIANDER POWDER.jpg" },
-    { name: "TIRUPATI FENNEL Type-1", quantity: "25KG BAG", price: 260, imageSrc: "/TIRUPATI FENNEL.webp" },
-    { name: "TIRUPATI FENNEL Type-2", quantity: "10LB", price: 48.5, imageSrc: "/TIRUPATI FENNEL.webp" },
-    { name: "TIRUPATI Hot Chilli Powder", quantity: "10lb", price: 40, imageSrc: "/TIRUPATI Hot Chilli Powder.jpg" },
+    { name: "TIRUPATI WHOLE DRY CHILLI (STEMLESS)", quantity: "5LB X 4", price: 80, imageSrc: "/TIRUPATI WHOLE DRY CHILLI (STEMLESS).jpg" },
+    { name: "TIRUPATI WHOLE DRY CHILLI (STEMLESS)", quantity: "10KG BOX", price: 84, imageSrc: "/TIRUPATI WHOLE DRY CHILLI (STEMLESS).jpg" },
+    { name: "TIRUPATI CORIANDER SEED", quantity: "400G", price: 2, imageSrc: "/TIRUPATI CORIANDER SEED.webp" },
+    { name: "TIRUPATI CORIANDER SEED", quantity: "20KG", price: 66, imageSrc: "/TIRUPATI CORIANDER SEED.webp" },
+    { name: "TIRUPATI CORIANDER POWDER", quantity: "10LB", price: 22, imageSrc: "/TIRUPATI CORIANDER POWDER.jpg" },
+    { name: "TIRUPATI FENNEL", quantity: "25KG BAG", price: 250, imageSrc: "/TIRUPATI FENNEL.webp" },
+    { name: "TIRUPATI FENNEL", quantity: "10LB", price: 48.5, imageSrc: "/TIRUPATI FENNEL.webp" },
+    { name: "TIRUPATI Hot Chilli Powder", quantity: "10LB", price: 40, imageSrc: "/TIRUPATI Hot Chilli Powder.jpg" },
     { name: "TIRUPATI Extra Hot Chilli Powder", quantity: "10lb", price: 40, imageSrc: "/TIRUPATI Hot Chilli Powder.jpg" },
-    { name: "TIRUPATI Crushed Chilli", quantity: "10lb", price: 45, imageSrc: "/TIRUPATI Crushed Chilli.webp" },
-    { name: "TIRUPATI Kashmiri Chilli Powder", quantity: "10lb", price: 48, imageSrc: "/TIRUPATI Kashmiri Chilli Powder.webp" },
-    { name: "TIRUPATI Cumin Type-1", quantity: "10 lb", price: 65, imageSrc: "/TIRUPATI Cumin.jpg" },
-    { name: "TIRUPATI Cumin Type-2", quantity: "25KG BAG", price: 340, imageSrc: "/TIRUPATI Cumin.jpg" },
-    { name: "MDH Degi Mirch", quantity: "500g x 24", price: 250, imageSrc: "/MDH Degi Mirch.jpg" },
-    { name: "MDH Kitchen King", quantity: "500g x 24", price: 208, imageSrc: "/MDH Kitchen King.jpg" },
-    { name: "Black Stone Flower", quantity: "1 lb", price: 14, imageSrc: "/Black Stone Flower.webp" },
-    { name: "Kasuri Methi", quantity: "1 kg", price: 16, imageSrc: "/Kasuri Methi.jpg" },
-    { name: "Ajwain", quantity: "5lb", price: 16.5, imageSrc: "/Ajwain.png" },
-    { name: "Black Pepper Whole (Indian)", quantity: "5lb", price: 27.5, imageSrc: "/Black Pepper Whole.jpg" },
-    { name: "Black Cardamom", quantity: "5lb", price: 49.5, imageSrc: "/Black Cardamom.jpg" },
+    { name: "TIRUPATI Crushed Chilli", quantity: "10LB", price: 40, imageSrc: "/TIRUPATI Crushed Chilli.webp" },
+    { name: "TIRUPATI Kashmiri Chilli Powder", quantity: "5lb", price: 48, imageSrc: "/TIRUPATI Kashmiri Chilli Powder.webp" },
+    { name: "TIRUPATI Kashmiri Chilli (Stemless)", quantity: "5LB", price: 48, imageSrc: "/kashmirchili.jpg" },
+    { name: "TIRUPATI Cumin", quantity: "10LB", price: 65, imageSrc: "/TIRUPATI Cumin.jpg" },
+    { name: "TIRUPATI Cumin", quantity: "25KG BAG", price: 340, imageSrc: "/TIRUPATI Cumin.jpg" },
+    { name: "Laxmi Garam Masala", quantity: "4LB x 6", price: 145, imageSrc: "/Laxmi Garam Masala.jpg" },
+    { name: "Degi Mirch", quantity: "500g", price: 7.5, imageSrc: "/MDH Degi Mirch.jpg" },
+    { name: "Kitchen King", quantity: "500g x 24", price: 208, imageSrc: "/MDH Kitchen King.jpg" },
+    { name: "Black Stone Flower", quantity: "1LB", price: 12.5, imageSrc: "/Black Stone Flower.webp" },
+    { name: "Kasuri Methi", quantity: "1kg", price: 16, imageSrc: "/Kasuri Methi.jpg" },
+    { name: "Ajwain", quantity: "5LB", price: 16.5, imageSrc: "/Ajwain.png" },
+    { name: "Marathi Mukku", quantity: "5lb", price: 27.5, imageSrc: "/Marathi Mukku.jpg" },
+    { name: "Black Cardamom", quantity: "5LB", price: 49.5, imageSrc: "/Black Cardamom.jpg" },
     { name: "Shah Jeera", quantity: "5lb", price: 45, imageSrc: "/Shah Jeera.webp" },
-    { name: "Cloves", quantity: "5lb", price: 54, imageSrc: "/Cloves.webp" },
-    { name: "Green Cardamom", quantity: "10LB", price: 200, imageSrc: "/Green Cardamom.jpg" },
-    { name: "Mace", quantity: "1 lb", price: 31, imageSrc: "/Mace.webp" },
-    { name: "LG Asaefaetida powder", quantity: "10x 100g", price: 30, imageSrc: "/LG Asaefaetida powder.jpg" }
+    { name: "Cloves", quantity: "5LB", price: 54, imageSrc: "/Cloves.webp" },
+    { name: "Mace", quantity: "1LB", price: 31, imageSrc: "/Mace.webp" },
+    { name: "Cinnamon Sticks", quantity: "5LB", price: 37, imageSrc: "/cinnamonsticks.jpg" },
+    { name: "LG Asaefaetida powder", quantity: "10x 100G", price: 30, imageSrc: "/LG Asaefaetida powder.jpg" }
   ],
   "Sauces & Condiments": [
     { name: "CHILLI GARLIC SAUCE", quantity: "3 x 3.78 ltr", price: 80, imageSrc: "/CHILLI GARLIC SAUCE.jpg" },
     { name: "SAMBAL OELEK", quantity: "3 x 3.78 ltr", price: 75, imageSrc: "/Sambal Oelek.webp" },
     { name: "SIRIRACHA HUYFONG", quantity: "12 bottles", price: 80, imageSrc: "/Siriracha HUYFONG.jpg" },
     { name: "CHINGS Schezwaun Sauce", quantity: "1 kg x 12", price: 85, imageSrc: "/CHINGS Schezwaun Sauce.jpg" },
-    { name: "CHINGS Veg Hakka Noodles", quantity: "15 x 600 g", price: 55, imageSrc: "/CHINGS Veg Hakka Noodles.webp" },
-    { name: "Heinz Tomato Ketchup", quantity: "6 x 2.78 Ltr", price: 57, imageSrc: "/Heinz Tomato Ketchup.jpg" }
   ],
   "Beverages": [
     { name: "Bru Coffee", quantity: "200g", price: 5.5, imageSrc: "/Bru Coffee.jpg" }
@@ -301,60 +304,70 @@ const ProductDetails = () => {
         </aside>
 
         <section className="md:col-span-5 mx-2">
-          <h2 className="text-xl font-bold mb-4 flex justify-center items-center">{selectedCategory}</h2>
-          <ul className="space-y-2">
-            {data[selectedCategory].map((product) => {
-              const cartItem = cart.find(item => item.name === product.name);
+  <h2 className="text-xl font-bold mb-4 flex justify-center items-center">
+    {selectedCategory}
+  </h2>
 
-              return (
-                <li
-                  key={product.name}
-                  className="border rounded-md p-2 flex flex-col md:flex-row justify-between items-center hover:bg-gray-100"
-                >
-                  <div className="mb-2 md:mb-0">
-                    <h3 className="text-sm md:text-base font-semibold mb-3">{product.name}</h3>
-                    <p className="text-xs md:text-sm"><b>Quantity -</b> {product.quantity}</p>
-                    <p className="text-xs md:text-sm"><b>$</b> {product.price}</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <Image
-                      width={80}
-                      height={80}
-                      alt={`${product.name} Image`}
-                      src={product.imageSrc}
-                      className="w-full h-full object-cover"
-                    />
+  {/* Grid Layout for Row-wise Display */}
+  <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {data[selectedCategory].map((product) => {
+      const cartItem = cart.find((item) => item.name === product.name);
 
-                    {cartItem ? (
-                      <div className="flex items-center space-x-2 mt-2">
-                        <button
-                          onClick={() => decreaseQuantity(cartItem)}
-                          className="bg-gray-100 hover:bg-gray-300 text-black px-2 text-xs py-1 rounded border border-gray-300"
-                        >
-                          -
-                        </button>
-                        <span className="text-sm mx-2">{cartItem.cartQuantity}</span>
-                        <button
-                          onClick={() => increaseQuantity(cartItem)}
-                          className="bg-gray-100 hover:bg-gray-300 text-black px-2 text-xs py-1 rounded border border-gray-300"
-                        >
-                          +
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={() => addToCart(product)}
-                        className="bg-blue-500 hover:bg-blue-700 text-white px-2 text-xs md:text-base py-1 rounded mt-2"
-                      >
-                        Add to Cart
-                      </button>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
+      return (
+        <li
+          key={product.name}
+          className="border rounded-md p-4 flex flex-col justify-between items-center hover:bg-gray-100"
+        >
+          <Image
+            width={100}
+            height={100}
+            alt={`${product.name} Image`}
+            src={product.imageSrc}
+            className="w-24 h-24 object-cover"
+          />
+
+          <div className="text-center mt-2">
+            <h3 className="text-sm md:text-base font-semibold mb-1">
+              {product.name}
+            </h3>
+            <p className="text-xs md:text-sm">
+              <b>Quantity -</b> {product.quantity}
+            </p>
+            <p className="text-xs md:text-sm">
+              <b>$</b> {product.price}
+            </p>
+          </div>
+
+          {cartItem ? (
+            <div className="flex items-center space-x-2 mt-2">
+              <button
+                onClick={() => decreaseQuantity(cartItem)}
+                className="bg-gray-100 hover:bg-gray-300 text-black px-2 text-xs py-1 rounded border border-gray-300"
+              >
+                -
+              </button>
+              <span className="text-sm mx-2">{cartItem.cartQuantity}</span>
+              <button
+                onClick={() => increaseQuantity(cartItem)}
+                className="bg-gray-100 hover:bg-gray-300 text-black px-2 text-xs py-1 rounded border border-gray-300"
+              >
+                +
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => addToCart(product)}
+              className="bg-blue-500 hover:bg-blue-700 text-white px-2 text-xs md:text-base py-1 rounded mt-2"
+            >
+              Add to Cart
+            </button>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+</section>
+
 
         <section className="md:col-span-4 hidden md:block">
           <h2 className="text-xl font-bold mb-4 flex justify-center items-center">My Cart <div className="px-4"><CiShoppingCart /></div></h2>

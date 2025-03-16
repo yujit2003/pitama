@@ -10,7 +10,7 @@ const AnimatedCircles = () => {
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
         size: `${Math.random() * 8 + 4}px`, // Smaller dots for better distribution
-        delay: `${Math.random() * 3}s`, // Shorter delay for varied animation
+        delay: `${Math.random() * 10}s`, // Shorter delay for varied animation
       }));
     };
     setCircles(generateCircles());
@@ -21,7 +21,7 @@ const AnimatedCircles = () => {
       {circles.map((circle, index) => (
         <span
           key={index}
-          className="absolute bg-red-400 rounded-full opacity-40 animate-ping"
+          className="absolute bg-gray-400 rounded-full opacity-40 animate-ping"
           style={{
             left: circle.left,
             top: circle.top,
