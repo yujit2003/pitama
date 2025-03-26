@@ -5,7 +5,6 @@ import Dots from "../../components/Home/Dots";
 import ProductDetails from "../../components/Products/ProductDetails";
 import Footer from "../../components/Home/Footer"
 import Dev from "../../components/Home/Dev";
-import { CartProvider } from "@/context/CartContext";
 const page = () => {
   return (
     <div>

@@ -2,7 +2,7 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
 import { CiShoppingCart } from "react-icons/ci";
 import Image from 'next/image';
-import { CartContext } from "../../context/CartContext.js";
+import { CartContext } from "../../contexts/CartContext.js";
 
 
 const data = {
