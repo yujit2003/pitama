@@ -7,6 +7,7 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [popupMessage, setPopupMessage] = useState("");
+  
 
   // Trigger a popup for notifications
   const triggerPopup = (message) => {
