@@ -1,12 +1,11 @@
-"use client"
-import React, { useState } from 'react';
-import { BsArrowRight } from 'react-icons/bs';
+"use client";
+import React, { useState } from "react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    subject: '',
-    message: '',
+    name: "",
+    subject: "",
+    message: "",
   });
 
   const handleInputChange = (e) => {
@@ -18,11 +17,10 @@ const Contact = () => {
     const { subject, message } = formData;
 
     if (!subject || !message) {
-      // Implement proper form validation and error handling here
-      alert('Please fill in all fields.');
+      alert("Please fill in all fields.");
       return;
     }
-    const email = 'pitamafoods@gmail.com'
+    const email = "pitamafoods@gmail.com";
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(message)}`;
@@ -31,55 +29,69 @@ const Contact = () => {
   };
 
   return (
-    <div className="h-full ">
-      <div className="container mx-auto py-14 text-center xl:text-left flex items-center justify-center h-full">
-        <div className="flex flex-col w-full max-w-[700px]">
-          <b className="text-4xl text-center mb-12">
-            Let&apos;s <span className="text-red-500">connect.</span>
-          </b>
-          {/* form */}
-          <form onSubmit={handleOpenMail} className="flex flex-1 flex-col gap-6 w-full mx-auto">
-            <div className="flex gap-x-6 w-full">
+    <>
+      <div className="max-w-7xl mx-auto px-4 py-10">
+        {/* Contact Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Contact Info */}
+          <div>
+            <h2 className="text-4xl font-bold mb-6">Contact</h2>
+            <ul className="space-y-6">
+              <li className="flex items-start">
+                <span className="text-2xl mr-4">📍</span>
+                <div>
+                  <p>1850 Ellesmere Road</p>
+                  <p>Scarborough</p>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-2xl mr-4">📞</span>
+                <div>289-380-7130</div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-2xl mr-4">✉️</span>
+                <div>info@pitamafoods.com</div>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Form */}
+          <div>
+            <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="text"
-                placeholder="Name"
-                className="input"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
+                placeholder="First Name"
+                className="col-span-1 border p-3 rounded-md"
               />
-            </div>
-            <input
-              type="text"
-              placeholder="Subject"
-              className="input"
-              name="subject"
-              value={formData.subject}
-              onChange={handleInputChange}
-              required
-            />
-            <textarea
-              placeholder="Message"
-              className="textarea"
-              name="message"
-              value={formData.message}
-              onChange={handleInputChange}
-              required
-            ></textarea>
-            <button
-              type="submit"
-              className="btn rounded-full border border-black/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group"
-            >
-              <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-300">
-                Let&apos;s talk
-              </span>
-              <BsArrowRight className="-translate-y-[120%] opacity-0 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]" />
-            </button>
-          </form>
+              <input
+                type="text"
+                placeholder="Last Name"
+                className="col-span-1 border p-3 rounded-md"
+              />
+              <input
+                type="email"
+                placeholder="Email *"
+                className="col-span-2 border p-3 rounded-md"
+              />
+              <textarea
+                placeholder="Message"
+                rows="5"
+                className="col-span-2 border p-3 rounded-md"
+              ></textarea>
+              <button
+                type="submit"
+                className="col-span-2 bg-gray-700 text-white py-2 rounded-md hover:bg-gray-600"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Map Section */}
+      
+    </>
   );
 };
 

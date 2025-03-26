@@ -1,7 +1,8 @@
 "use client";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useContext } from "react";
 import { CiShoppingCart } from "react-icons/ci";
 import Image from 'next/image';
+import { CartContext } from "@/context/CartContext";
 
 
 const data = {
@@ -98,8 +99,13 @@ const data = {
 
 const ProductDetails = () => {
   const [selectedCategory, setSelectedCategory] = useState("Rice");
-  const [cart, setCart] = useState([]);
   const [mobile, setMobile] = useState('');
+  const { cart,
+    setCart,
+    addToCart,
+    increaseQuantity,
+    decreaseQuantity,
+    triggerPopup } = useContext(CartContext);
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart'));
@@ -110,329 +116,94 @@ const ProductDetails = () => {
 
   const categories = Object.keys(data);
 
-  const removeFromCart = (item) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.filter(cartItem => cartItem.name !== item.name);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
-  };
-
   const handleCategoryClick = (category) => {
+    // triggerPopup(`Switched to ${category}`);
     setSelectedCategory(category);
   };
 
-  const whatsappMessage = () => {
-    const phoneNumber = "+12893807130"; // Use the international format
-    const body = cart
-      .map(
-        (item) =>
-          `${item.name} - ${item.quantity} - $${item.price * item.cartQuantity} - Item Quantity: ${item.cartQuantity}`
-      )
-      .join("\n");
-  
-    const encodedBody = encodeURIComponent(body);
-  
-    // Check if the user is on mobile or desktop
-    const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  
-    let url;
-  
-    if (isMobile) {
-      // For mobile devices, use the WhatsApp app
-      url = `whatsapp://send?phone=${phoneNumber}&text=${encodedBody}`;
-    } else {
-      // For desktop (WhatsApp Web)
-      url = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedBody}`;
-    }
-  
-    // Open the URL in a new tab
-    window.open(url, "_blank");
-  };
 
-  const mailto = () => {
-
-    const email = "pitamafoods@gmail.com";
-    const subject = "New Order";
-    const body = `Mobile Number: ${mobile}\n\n` +
-      cart.map(item => `${item.name} - ${item.quantity} - $ ${item.price * item.cartQuantity} - Item Quantity : ${item.cartQuantity}`).join("\n");
-
-    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(mailtoLink, 'emailWindow');
-  };
-
-
-  const ClearCart = () => {
-    setCart([]);
-    localStorage.setItem('cart', JSON.stringify([]));
-
-  }
-
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existingProductIndex = prevCart.findIndex(cartItem => cartItem.name === product.name);
-
-      if (existingProductIndex !== -1) {
-        const updatedCart = prevCart.map((cartItem, index) => {
-          if (index === existingProductIndex) {
-            return { ...cartItem, cartQuantity: cartItem.cartQuantity + 1 };
-          }
-          return cartItem;
-        });
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
-        return updatedCart;
-      } else {
-        const updatedCart = [...prevCart, { ...product, cartQuantity: 1 }];
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
-        return updatedCart;
-      }
-    });
-  };
-
-  const increaseQuantity = (cartItem) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.map(item => {
-        if (item.name === cartItem.name) {
-          return { ...item, cartQuantity: item.cartQuantity + 1 };
-        }
-        return item;
-      });
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
-  };
-
-  const decreaseQuantity = (cartItem) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.map(item => {
-        if (item.name === cartItem.name) {
-          return { ...item, cartQuantity: Math.max(item.cartQuantity - 1, 0) };
-        }
-        return item;
-      }).filter(item => item.cartQuantity > 0);  // Remove item if quantity is 0
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
-  };
 
 
   return (
     <div className="min-h-screen py-10">
-      <div className="">
-        <section className="md:hidden block mb-6 mx-4">
-          <h2 className="text-xl font-bold mb-4 flex justify-center items-center">My Cart <div className="px-4"><CiShoppingCart /></div></h2>
-          <ul className="space-y-2">
-            {cart.map((item, index) => (
-              <li
-                key={index}
-                className="border rounded-md p-2 flex items-center justify-between hover:bg-gray-100"
-              >
-                <div className="flex items-center">
-                  <button
-                    onClick={() => removeFromCart(item)}
-                    className="text-red-500 mr-2"
-                  >
-                    Remove
-                  </button>
-
-                  <div>
-                    <h3 className="text-sm md:text-base font-semibold">{item.name}</h3>
-                    <p className="text-xs md:text-sm">{item.quantity}</p>
-                    <p className="text-xs md:text-sm">$ {item.price}</p>
-                    <p className="text-xs md:text-sm">Quantity: {item.cartQuantity}</p>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-          {cart.length > 0 ? (
-            <div className="block p-4 space-y-4">
-              <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
-                <input
-                  type="text"
-                  placeholder="Mobile Number"
-                  className="border p-2 rounded-md flex-grow"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="flex flex-col md:flex-row md:space-x-4">
-                <button
-                  onClick={() => ClearCart()}
-                  className="bg-red-500 text-white px-4 py-2 rounded mb-2 md:mb-0"
-                >
-                  Clear Cart
-                </button>
-                <button
-                  onClick={() =>
-                    mailto()
-                  }
-                  className="bg-green-500 text-white px-4 py-2 rounded mb-2"
-                >
-                  Order via Email
-                </button>
-                <button
-                  onClick={() =>
-                    whatsappMessage()
-                  }
-                  className="bg-green-500 text-white px-4 py-2 rounded mb-2"
-                >
-                  Order via WhatsApp
-                </button>
-              </div>
-            </div>
-          ) : (<h1 className="flex justify-center items-center  font-bold text-[#e73737]">Empty</h1>)}
-
-        </section>
+      {/* Categories Section */}
+      <div className="flex flex-wrap justify-center gap-2 mb-6">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => handleCategoryClick(category)}
+            className={`px-4 py-2 rounded-full font-medium text-xs md:text-sm shadow-sm transition-all duration-300 ${selectedCategory === category
+              ? "bg-gray-700 text-white hover:bg-gray-600"
+              : "bg-gray-300 text-gray-800 hover:bg-gray-400"
+              }`}
+          >
+            {category}
+          </button>
+        ))}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-        <aside className="md:col-span-3 ml-4">
-          <h2 className="text-xl font-bold mb-4">Categories</h2>
-          <ul className="space-y-2">
-            {categories.map((category) => (
+
+
+      {/* Product Section */}
+      {/* Product Section */}
+      <section className="container mx-auto px-4">
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          {selectedCategory}
+        </h2>
+        {/* Add a key to the <ul> based on the selectedCategory */}
+        <ul key={selectedCategory} className="grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-3">
+          {data[selectedCategory].map((product) => {
+            const cartItem = cart.find((item) => item.name === product.name);
+            return (
               <li
-                key={category}
-                onClick={() => handleCategoryClick(category)}
-                className={`cursor-pointer ${selectedCategory === category ? 'font-semibold' : ''}`}
+                key={product.name}
+                className="border rounded-lg p-2 h-[25vh] md:h-[60vh] flex flex-col justify-between items-center shadow-md hover:shadow-lg transition-shadow duration-300"
               >
-                {category}
-                <hr />
-              </li>
-            ))}
-          </ul>
-        </aside>
-
-        <section className="md:col-span-5 mx-2">
-  <h2 className="text-xl font-bold mb-4 flex justify-center items-center">
-    {selectedCategory}
-  </h2>
-
-  {/* Grid Layout for Row-wise Display */}
-  <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    {data[selectedCategory].map((product) => {
-      const cartItem = cart.find((item) => item.name === product.name);
-
-      return (
-        <li
-          key={product.name}
-          className="border rounded-md p-4 flex flex-col justify-between items-center hover:bg-gray-100"
-        >
-          <Image
-            width={100}
-            height={100}
-            alt={`${product.name} Image`}
-            src={product.imageSrc}
-            className="w-24 h-24 object-cover"
-          />
-
-          <div className="text-center mt-2">
-            <h3 className="text-sm md:text-base font-semibold mb-1">
-              {product.name}
-            </h3>
-            <p className="text-xs md:text-sm">
-              <b>Quantity -</b> {product.quantity}
-            </p>
-            <p className="text-xs md:text-sm">
-              <b>$</b> {product.price}
-            </p>
-          </div>
-
-          {cartItem ? (
-            <div className="flex items-center space-x-2 mt-2">
-              <button
-                onClick={() => decreaseQuantity(cartItem)}
-                className="bg-gray-100 hover:bg-gray-300 text-black px-2 text-xs py-1 rounded border border-gray-300"
-              >
-                -
-              </button>
-              <span className="text-sm mx-2">{cartItem.cartQuantity}</span>
-              <button
-                onClick={() => increaseQuantity(cartItem)}
-                className="bg-gray-100 hover:bg-gray-300 text-black px-2 text-xs py-1 rounded border border-gray-300"
-              >
-                +
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => addToCart(product)}
-              className="bg-blue-500 hover:bg-blue-700 text-white px-2 text-xs md:text-base py-1 rounded mt-2"
-            >
-              Add to Cart
-            </button>
-          )}
-        </li>
-      );
-    })}
-  </ul>
-</section>
-
-
-        <section className="md:col-span-4 hidden md:block">
-          <h2 className="text-xl font-bold mb-4 flex justify-center items-center">My Cart <div className="px-4"><CiShoppingCart /></div></h2>
-          {cart.length > 0 ? (
-            <div className="block p-4 space-y-4">
-              <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
-                <input
-                  type="text"
-                  placeholder="Mobile Number"
-                  className="border p-2 rounded-md flex-grow"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                  required
+                <Image
+                  width={100}
+                  height={100}
+                  alt={`${product.name} Image`}
+                  src={product.imageSrc}
+                  className="w-16 h-16 md:h-[30vh] md:w-48 object-cover"
                 />
-              </div>
-              <div className="flex flex-col md:flex-row md:space-x-4">
-                <button
-                  onClick={() => ClearCart()}
-                  className="bg-red-500 text-white px-4 py-2 rounded mb-2 md:mb-0"
-                >
-                  Clear Cart
-                </button>
-                <button
-                  onClick={() => mailto()}
-                  className="bg-green-500 text-white px-4 py-2 rounded"
-                >
-                  Order via Email
-                </button>
-                <button
-                  onClick={() =>
-                    whatsappMessage()
-                  }
-                  className="bg-green-500 text-white px-4 py-2 rounded "
-                >
-                  Order via WhatsApp
-                </button>
-              </div>
-            </div>
-          ) : (<h1 className="flex justify-center items-center  font-bold text-[#dd0f0f]">Empty</h1>)}
-
-          <ul className="space-y-2">
-            {cart.map((item, index) => (
-              <li
-                key={index}
-                className="border rounded-md p-2 flex items-center justify-between hover:bg-gray-100 mr-2"
-              >
-                <div className="flex items-center">
-                  <button
-                    onClick={() => removeFromCart(item)}
-                    className="text-red-500 mr-2"
-                  >
-                    Remove
-                  </button>
-                  <div className="">
-                    <h3 className="text-sm md:text-base font-semibold">{item.name}</h3>
-                    <p className="text-xs md:text-sm">{item.quantity}</p>
-                    <p className="text-xs md:text-sm">$ {item.price}</p>
-                    <p className="text-xs md:text-sm">Quantity: {item.cartQuantity}</p>
-                  </div>
+                <div className="text-center mt-2">
+                  <h3 className="text-xs md:text-xl font-semibold mb-1">{product.name}</h3>
+                  <p className="text-xs md:text-xl">
+                    <b>Qty:</b> {product.quantity}
+                  </p>
+                  <p className="text-xs md:text-xl">
+                    <b>Price:</b> ${product.price.toFixed(2)}
+                  </p>
                 </div>
+                {cartItem ? (
+                  <div className="flex items-center space-x-1 md:space-x-1 mt-2">
+                    <button
+                      onClick={() => decreaseQuantity(cartItem)}
+                      className="bg-gray-100 hover:bg-gray-300 text-black px-2 py-1 rounded border border-gray-300 text-xs md:text-xl"
+                    >
+                      -
+                    </button>
+                    <span className="text-xs md:text-xl">{cartItem.cartQuantity}</span>
+                    <button
+                      onClick={() => increaseQuantity(cartItem)}
+                      className="bg-gray-100 hover:bg-gray-300 text-black px-2 py-1 rounded border border-gray-300 text-xs md:text-xl"
+                    >
+                      +
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="bg-blue-500 md:text-xl hover:bg-blue-700 text-white px-2 py-1 rounded mt-2 mb-2 text-xs md:px-4 md:py-2 md:mt-4"
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </li>
-            ))}
-          </ul>
-        </section>
-      </div>
+            );
+          })}
+        </ul>
+      </section>
+
     </div>
   );
 };

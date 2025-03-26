@@ -10,6 +10,8 @@ import Dev from "../components/Home/Dev";
 
 export default function Home() {
 
+
+
   return (
     <>
           <NavBar page="home" />
