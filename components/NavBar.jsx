@@ -4,7 +4,7 @@ import Link from "next/link";
 import logo from "../images/nav_logo.png";
 import Image from "next/image";
 import { CiShoppingCart } from "react-icons/ci";
-import { CartContext } from "@/context/CartContext";
+import { CartContext } from "../context/CartContext.js";
 
 const Header = ({ page }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
